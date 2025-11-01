@@ -6,12 +6,12 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClient } from './services/api/queryClient'
 import { ThemeProvider } from 'styled-components/native'
-import { darkTheme } from './styles/theme'
+import { theme } from './styles/theme'
 
 export default function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <ThemeProvider theme={darkTheme}>
+      <ThemeProvider theme={theme}>
         <SafeAreaProvider>
           <QueryClientProvider client={queryClient}>
             <NavigationContainer>

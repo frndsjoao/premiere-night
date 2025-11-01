@@ -1,6 +1,6 @@
 import { DefaultTheme } from 'styled-components/native'
 
-export const darkTheme: DefaultTheme = {
+export const theme: DefaultTheme = {
   colors: {
     primary: '#E50914',
     secondary: '#B81D24',
@@ -8,6 +8,7 @@ export const darkTheme: DefaultTheme = {
     surface: '#1F1F1F',
     text: '#FFFFFF',
     textSecondary: '#B3B3B3',
+    gray: '#B3B3B3',
     error: '#F44336',
     success: '#4CAF50',
     warning: '#FF9800',

@@ -1,13 +1,13 @@
 import React, { memo, useCallback, useMemo } from 'react'
-import { IFilm } from '../../../@types/Film'
 import * as S from './styles'
 import { getYear } from '../../../utils/formatDate'
 import FastImage from 'react-native-fast-image'
 import { TMDB_IMAGE_URL } from '@env'
 import { useAppNavigation } from '../../../hooks/useAppNavigation'
+import { ITMDBMovieList } from '../../../@types/TMDBResponses'
 
 interface FilmCardProps {
-  film: IFilm
+  film: ITMDBMovieList
 }
 
 function FilmCard({ film }: FilmCardProps) {

@@ -1,17 +1,17 @@
 import React, { useCallback, memo } from 'react'
 import { ListRenderItemInfo } from 'react-native'
-import { IFilm } from '../../../@types/Film'
 import FilmCard from '../FilmCard'
 import * as S from './styles'
+import { ITMDBMovieList } from '../../../@types/TMDBResponses'
 
 interface FilmCarouselProps {
-  films: IFilm[]
+  films: ITMDBMovieList[]
   title?: string
 }
 
 const FilmCarousel = ({ films, title }: FilmCarouselProps) => {
   const renderItem = useCallback(
-    ({ item }: ListRenderItemInfo<IFilm>) => (
+    ({ item }: ListRenderItemInfo<ITMDBMovieList>) => (
       <S.CardWrapper>
         <FilmCard film={item} />
       </S.CardWrapper>
@@ -19,7 +19,10 @@ const FilmCarousel = ({ films, title }: FilmCarouselProps) => {
     [],
   )
 
-  const keyExtractor = useCallback((item: IFilm) => item.id.toString(), [])
+  const keyExtractor = useCallback(
+    (item: ITMDBMovieList) => item.id.toString(),
+    [],
+  )
 
   return (
     <S.Container>

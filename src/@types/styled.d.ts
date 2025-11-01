@@ -9,6 +9,7 @@ declare module 'styled-components/native' {
       surface: string
       text: string
       textSecondary: string
+      gray: string
       error: string
       success: string
       warning: string

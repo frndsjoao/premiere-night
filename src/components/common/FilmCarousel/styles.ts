@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
 import { FlatList } from 'react-native'
-import { IFilm } from '../../../@types/Film'
+import { ITMDBMovieList } from '../../../@types/TMDBResponses'
 
 export const Container = styled.View`
   margin-top: ${({ theme }) => theme.spacing.md}px;
@@ -18,9 +18,11 @@ export const CardWrapper = styled.View`
   margin-right: ${({ theme }) => theme.spacing.sm}px;
 `
 
-export const FlatListWrapper = styled(FlatList<IFilm>).attrs(({ theme }) => ({
-  contentContainerStyle: {
-    paddingHorizontal: theme.spacing.md,
-    marginTop: theme.spacing.sm,
-  },
-}))``
+export const FlatListWrapper = styled(FlatList<ITMDBMovieList>).attrs(
+  ({ theme }) => ({
+    contentContainerStyle: {
+      paddingHorizontal: theme.spacing.md,
+      marginTop: theme.spacing.sm,
+    },
+  }),
+)``
