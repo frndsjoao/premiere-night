@@ -11,8 +11,16 @@ const Tab = createBottomTabNavigator<MainTabParamList>()
 function MainTabs() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Spotlight" component={SpotlightHomeScreen} />
-      <Tab.Screen name="Watchlist" component={WatchlistScreen} />
+      <Tab.Screen
+        name="Spotlight"
+        component={SpotlightHomeScreen}
+        options={{ headerShown: false }}
+      />
+      <Tab.Screen
+        name="Watchlist"
+        component={WatchlistScreen}
+        options={{ headerShown: false }}
+      />
     </Tab.Navigator>
   )
 }
