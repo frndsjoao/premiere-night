@@ -1,11 +1,13 @@
-import React from 'react'
-import { ActivityIndicator } from 'react-native'
+import React, { memo } from 'react'
 import * as S from './styles'
 
-export default function LoadingScreen() {
+function LoadingScreen() {
   return (
     <S.Container>
-      <ActivityIndicator size="large" color="#FFF" />
+      <S.Loader size="large" />
+      <S.Label>Loading...</S.Label>
     </S.Container>
   )
 }
+
+export default memo(LoadingScreen)

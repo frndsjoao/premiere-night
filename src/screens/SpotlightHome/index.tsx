@@ -1,19 +1,27 @@
-import { View, Text, Button } from 'react-native'
-import React, { useMemo } from 'react'
-import { useAppNavigation } from '../../hooks/useAppNavigation'
+import React, { memo, useMemo } from 'react'
+import * as S from './styles'
 import {
   useGetPopularFilms,
   useGetTopRatedFilms,
   useGetUpcomingFilms,
 } from '../../hooks/useFilms'
 import LoadingScreen from '../../components/layout/LoadingScreen'
+import FilmCarousel from '../../components/common/FilmCarousel'
+import { formatDate } from '../../utils/formatDate'
+import SafeAreaContainer from '../../components/layout/SafeAreaContainer'
 
-export default function SpotlightHomeScreen() {
-  const navigation = useAppNavigation()
-
+function SpotlightHomeScreen() {
   const popularFilms = useGetPopularFilms()
   const topRatedFilms = useGetTopRatedFilms()
   const upcomingFilms = useGetUpcomingFilms()
+
+  const upcomingSectionTitle = useMemo(
+    () =>
+      upcomingFilms.data
+        ? `Upcoming until ${formatDate(upcomingFilms.data.dates.maximum)}`
+        : 'Upcoming',
+    [upcomingFilms.data],
+  )
 
   const isLoading = useMemo(
     () =>
@@ -28,12 +36,27 @@ export default function SpotlightHomeScreen() {
   }
 
   return (
-    <View>
-      <Text>SpotlightHome</Text>
-      <Button
-        title="Show film"
-        onPress={() => navigation.navigate('FilmDetail', { filmId: 9 })}
-      />
-    </View>
+    <SafeAreaContainer>
+      <S.ScrollContainer>
+        <S.Header>
+          <S.Title>Premiere Night</S.Title>
+        </S.Header>
+
+        {popularFilms.data && (
+          <FilmCarousel title="Popular" films={popularFilms.data.results} />
+        )}
+        {topRatedFilms.data && (
+          <FilmCarousel title="Top Rated" films={topRatedFilms.data.results} />
+        )}
+        {upcomingFilms.data && (
+          <FilmCarousel
+            title={upcomingSectionTitle}
+            films={upcomingFilms.data.results}
+          />
+        )}
+      </S.ScrollContainer>
+    </SafeAreaContainer>
   )
 }
+
+export default memo(SpotlightHomeScreen)
