@@ -1,11 +1,11 @@
-import { NavigatorScreenParams } from '@react-navigation/native';
+import { NavigatorScreenParams } from '@react-navigation/native'
 
 export type MainTabParamList = {
-  Spotlight: undefined;
-  Watchlist: undefined;
-};
+  Spotlight: undefined
+  Watchlist: undefined
+}
 
 export type RootStackParamList = {
-  MainTabs: NavigatorScreenParams<MainTabParamList>;
-  FilmDetail: { filmId: number };
-};
+  MainTabs: NavigatorScreenParams<MainTabParamList>
+  FilmDetail: { filmId: number }
+}

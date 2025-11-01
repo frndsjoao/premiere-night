@@ -8,7 +8,10 @@ export default function SpotlightHomeScreen() {
   return (
     <View>
       <Text>SpotlightHome</Text>
-      <Button title='Show film' onPress={() => navigation.navigate("FilmDetail", { filmId: 9 })}/> 
+      <Button
+        title="Show film"
+        onPress={() => navigation.navigate('FilmDetail', { filmId: 9 })}
+      />
     </View>
   )
 }
