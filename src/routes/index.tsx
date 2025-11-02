@@ -4,22 +4,46 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { MainTabParamList, RootStackParamList } from './types'
 import FilmDetailScreen from '../screens/FilmDetail'
 import WatchlistScreen from '../screens/Watchlist'
+import { useTheme } from 'styled-components/native'
+import { SpotlightIcon, WatchlistIcon } from './components/tabIcons'
 
 const Stack = createStackNavigator<RootStackParamList>()
 const Tab = createBottomTabNavigator<MainTabParamList>()
 
 function MainTabs() {
+  const theme = useTheme()
+
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      screenOptions={{
+        tabBarStyle: {
+          backgroundColor: theme.colors.black,
+          borderTopColor: theme.colors.border,
+          borderTopWidth: 1,
+        },
+        tabBarActiveTintColor: theme.colors.button,
+        tabBarInactiveTintColor: theme.colors.gray,
+        tabBarLabelStyle: {
+          fontSize: 12,
+          fontWeight: '600',
+        },
+      }}
+    >
       <Tab.Screen
         name="Spotlight"
         component={SpotlightHomeScreen}
-        options={{ headerShown: false }}
+        options={{
+          headerShown: false,
+          tabBarIcon: SpotlightIcon,
+        }}
       />
       <Tab.Screen
         name="Watchlist"
         component={WatchlistScreen}
-        options={{ headerShown: false }}
+        options={{
+          headerShown: false,
+          tabBarIcon: WatchlistIcon,
+        }}
       />
     </Tab.Navigator>
   )

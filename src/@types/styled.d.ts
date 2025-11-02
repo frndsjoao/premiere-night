@@ -16,6 +16,7 @@ declare module 'styled-components/native' {
       success: string
       warning: string
       border: string
+      black: string
     }
     spacing: {
       xs: number

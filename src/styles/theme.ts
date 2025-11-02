@@ -15,6 +15,7 @@ export const theme: DefaultTheme = {
     success: '#4CAF50',
     warning: '#FF9800',
     border: '#333333',
+    black: '#000',
   },
   spacing: {
     xs: 4,
