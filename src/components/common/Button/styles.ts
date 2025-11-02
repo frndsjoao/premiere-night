@@ -7,6 +7,9 @@ export const Container = styled.TouchableOpacity`
   margin-top: ${({ theme }) => theme.spacing.sm}px;
   margin-bottom: ${({ theme }) => theme.spacing.sm}px;
   align-items: center;
+  flex-direction: row;
+  gap: ${({ theme }) => theme.spacing.sm};
+  justify-content: center;
 `
 
 export const Title = styled.Text`

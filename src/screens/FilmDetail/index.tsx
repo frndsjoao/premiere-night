@@ -12,18 +12,38 @@ import DetailCard from '../../components/common/DetailCard'
 import { getLanguageName } from '../../utils/getLanguageName'
 import { useTheme } from 'styled-components/native'
 import { X } from 'lucide-react-native'
+import { useAppDispatch, useAppSelector } from '../../store'
+import {
+  addToWatchlist,
+  removeFromWatchlist,
+  selectIsInWatchlist,
+} from '../../store/slice/watchlist'
+import { AddedIcon, AddIcon } from './components/FilmDetailIconBtn'
 
 type Props = StackScreenProps<RootStackParamList, 'FilmDetail'>
 
 function FilmDetailScreen({ route, navigation }: Props) {
   const { filmId } = route.params
   const theme = useTheme()
+  const dispatch = useAppDispatch()
 
   const { data: film, isLoading } = useGetFilmById(filmId)
+  const filmIsInWatchlist = useAppSelector(state =>
+    film ? selectIsInWatchlist(film?.id)(state) : false,
+  )
 
   const handleClose = useCallback(() => {
     navigation.goBack()
   }, [navigation])
+
+  const handleWatchlist = useCallback(async () => {
+    if (!film) return
+    if (filmIsInWatchlist) {
+      dispatch(removeFromWatchlist(film?.id))
+    } else {
+      dispatch(addToWatchlist(film))
+    }
+  }, [dispatch, film, filmIsInWatchlist])
 
   const imageSource = useMemo(() => {
     let uri = ''
@@ -96,7 +116,11 @@ function FilmDetailScreen({ route, navigation }: Props) {
           </S.Info>
 
           <S.ButtonWrapper>
-            <Button title="Add to watchlist" />
+            <Button
+              icon={filmIsInWatchlist ? AddedIcon : AddIcon}
+              title={filmIsInWatchlist ? 'Added' : 'Add to watchlist'}
+              onPress={handleWatchlist}
+            />
           </S.ButtonWrapper>
 
           <S.Section>
