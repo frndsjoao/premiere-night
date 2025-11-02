@@ -7,6 +7,8 @@ export const theme: DefaultTheme = {
     background: '#141414',
     surface: '#1F1F1F',
     text: '#FFFFFF',
+    textNegative: '#333333',
+    button: '#f9fafb',
     textSecondary: '#B3B3B3',
     gray: '#B3B3B3',
     error: '#F44336',
