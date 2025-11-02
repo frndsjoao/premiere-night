@@ -3,12 +3,37 @@ import FastImage from 'react-native-fast-image'
 import styled from 'styled-components/native'
 import LinearGradient from 'react-native-linear-gradient'
 
+export const Container = styled.View`
+  flex: 1;
+  margin-top: 60px;
+  background-color: ${({ theme }) => theme.colors.background};
+  border-top-left-radius: ${({ theme }) => theme.borderRadius.lg}px;
+  border-top-right-radius: ${({ theme }) => theme.borderRadius.lg}px;
+  overflow: hidden;
+`
+
 export const ModalHandle = styled.View`
   width: 50px;
   height: 4px;
   background-color: ${({ theme }) => theme.colors.gray};
   border-radius: ${({ theme }) => theme.borderRadius.xl}px;
-  margin: 0 auto ${({ theme }) => theme.spacing.md}px;
+  margin-top: ${({ theme }) => theme.spacing.sm}px;
+  margin-bottom: ${({ theme }) => theme.spacing.md}px;
+  margin-right: auto;
+  margin-left: auto;
+`
+
+export const CloseButton = styled.TouchableOpacity`
+  position: absolute;
+  z-index: 99;
+  right: ${({ theme }) => theme.spacing.sm}px;
+  top: ${({ theme }) => theme.spacing.sm}px;
+  width: ${({ theme }) => theme.spacing.xl}px;
+  height: ${({ theme }) => theme.spacing.xl}px;
+  border-radius: ${({ theme }) => theme.borderRadius.xl}px;
+  background-color: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
 `
 
 export const CoverContainer = styled.View`

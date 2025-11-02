@@ -33,7 +33,11 @@ export function AppNavigator() {
         name="FilmDetail"
         component={FilmDetailScreen}
         options={{
-          presentation: 'modal',
+          presentation: 'transparentModal',
+          gestureEnabled: true,
+          gestureDirection: 'vertical',
+          cardOverlayEnabled: true,
+          cardStyle: { backgroundColor: 'transparent' },
           cardStyleInterpolator: ({ current, layouts }) => {
             return {
               cardStyle: {
@@ -45,6 +49,12 @@ export function AppNavigator() {
                     }),
                   },
                 ],
+              },
+              overlayStyle: {
+                opacity: current.progress.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [0, 0.5],
+                }),
               },
             }
           },

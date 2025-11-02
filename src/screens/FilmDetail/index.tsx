@@ -1,7 +1,6 @@
-import React, { memo, useMemo } from 'react'
+import React, { memo, useCallback, useMemo } from 'react'
 import { RootStackParamList } from '../../routes/types'
 import { StackScreenProps } from '@react-navigation/stack'
-import SafeAreaContainer from '../../components/layout/SafeAreaContainer'
 import * as S from './styles'
 import { useGetFilmById } from '../../hooks/useFilms'
 import LoadingScreen from '../../components/layout/LoadingScreen'
@@ -12,14 +11,19 @@ import Button from '../../components/common/Button'
 import DetailCard from '../../components/common/DetailCard'
 import { getLanguageName } from '../../utils/getLanguageName'
 import { useTheme } from 'styled-components/native'
+import { X } from 'lucide-react-native'
 
 type Props = StackScreenProps<RootStackParamList, 'FilmDetail'>
 
-function FilmDetailScreen({ route }: Props) {
+function FilmDetailScreen({ route, navigation }: Props) {
   const { filmId } = route.params
   const theme = useTheme()
 
   const { data: film, isLoading } = useGetFilmById(filmId)
+
+  const handleClose = useCallback(() => {
+    navigation.goBack()
+  }, [navigation])
 
   const imageSource = useMemo(() => {
     let uri = ''
@@ -64,10 +68,14 @@ function FilmDetailScreen({ route }: Props) {
   }
 
   return (
-    <SafeAreaContainer>
-      <S.ScrollContainer>
-        <S.ModalHandle />
+    <S.Container>
+      <S.ModalHandle />
 
+      <S.CloseButton onPress={handleClose}>
+        <X size={20} color={theme.colors.text} />
+      </S.CloseButton>
+
+      <S.ScrollContainer>
         <S.CoverContainer>
           <S.Cover
             source={imageSource}
@@ -108,7 +116,7 @@ function FilmDetailScreen({ route }: Props) {
           </S.Section>
         </S.Content>
       </S.ScrollContainer>
-    </SafeAreaContainer>
+    </S.Container>
   )
 }
 
