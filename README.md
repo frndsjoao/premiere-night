@@ -82,6 +82,43 @@ src/
 └── @types/         # TypeScript types
 ```
 
+## Deep Linking
+
+The app supports deep links to navigate directly to specific movies using the `premierenight://` URL scheme.
+
+### URL Format
+
+```
+premierenight://movie/{movieId}
+```
+
+Where `{movieId}` is the TMDB movie ID number.
+
+### Testing Deep Links
+
+**iOS Simulator**
+
+```bash
+xcrun simctl openurl booted "premierenight://movie/550"
+```
+
+**Android Emulator**
+
+```bash
+adb shell am start -W -a android.intent.action.VIEW -d "premierenight://movie/550"
+```
+
+### Example Movie IDs
+
+Here are some popular movies you can test with:
+
+- Fight Club: `premierenight://movie/550`
+- The Matrix: `premierenight://movie/603`
+- Inception: `premierenight://movie/27205`
+- The Dark Knight: `premierenight://movie/155`
+- Interstellar: `premierenight://movie/157336`
+- Pulp Fiction: `premierenight://movie/680`
+
 ## Troubleshooting
 
 **iOS build fails**
@@ -92,3 +129,9 @@ src/
 **Metro bundler issues**
 
 - Clear cache: `npm start -- --reset-cache`
+
+**Deep links not working**
+
+- Make sure the app is installed on the device/simulator
+- On iOS, you may need to rebuild after modifying Info.plist: `npm run ios`
+- On Android, uninstall and reinstall the app if deep links aren't working

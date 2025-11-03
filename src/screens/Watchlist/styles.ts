@@ -53,6 +53,7 @@ export const FlatListWrapper = styled(FlatList<IFilm>).attrs(({ theme }) => ({
   contentContainerStyle: {
     paddingHorizontal: theme.spacing.md,
     paddingBottom: theme.spacing.lg,
+    gap: theme.spacing.md,
   },
   columnWrapperStyle: {
     gap: theme.spacing.sm,

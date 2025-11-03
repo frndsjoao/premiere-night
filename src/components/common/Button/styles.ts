@@ -8,7 +8,7 @@ export const Container = styled.TouchableOpacity`
   margin-bottom: ${({ theme }) => theme.spacing.sm}px;
   align-items: center;
   flex-direction: row;
-  gap: ${({ theme }) => theme.spacing.sm};
+  gap: ${({ theme }) => theme.spacing.sm}px;
   justify-content: center;
 `
 
