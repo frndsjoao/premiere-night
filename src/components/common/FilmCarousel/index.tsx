@@ -11,11 +11,7 @@ interface FilmCarouselProps {
 
 const FilmCarousel = ({ films, title }: FilmCarouselProps) => {
   const renderItem = useCallback(
-    ({ item }: ListRenderItemInfo<ITMDBMovieList>) => (
-      <S.CardWrapper>
-        <FilmCard film={item} />
-      </S.CardWrapper>
-    ),
+    ({ item }: ListRenderItemInfo<ITMDBMovieList>) => <FilmCard film={item} />,
     [],
   )
 
@@ -27,16 +23,27 @@ const FilmCarousel = ({ films, title }: FilmCarouselProps) => {
   return (
     <S.Container>
       {title && <S.Title>{title}</S.Title>}
-      <S.FlatListWrapper
-        keyExtractor={keyExtractor}
-        data={films}
-        renderItem={renderItem}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        removeClippedSubviews
-        maxToRenderPerBatch={5}
-        initialNumToRender={3}
-      />
+      <S.CarouselWrapper>
+        <S.FlatListWrapper
+          keyExtractor={keyExtractor}
+          data={films}
+          renderItem={renderItem}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          removeClippedSubviews
+          maxToRenderPerBatch={5}
+          initialNumToRender={3}
+        />
+        <S.FadeGradient
+          colors={[
+            'rgba(0, 0, 0, 0)',
+            'rgba(0, 0, 0, 0.4)',
+            'rgba(0, 0, 0, 0.6)',
+          ]}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 0 }}
+        />
+      </S.CarouselWrapper>
     </S.Container>
   )
 }

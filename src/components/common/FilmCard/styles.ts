@@ -2,7 +2,7 @@ import FastImage from 'react-native-fast-image'
 import styled from 'styled-components/native'
 
 export const Container = styled.TouchableOpacity`
-  width: 150px;
+  width: 180px;
 `
 
 export const Info = styled.View`
@@ -11,8 +11,8 @@ export const Info = styled.View`
 `
 
 export const Cover = styled(FastImage)`
-  height: 210px;
-  width: 140px;
+  height: 250px;
+  width: 180px;
   border-radius: ${({ theme }) => theme.borderRadius.md}px;
 `
 

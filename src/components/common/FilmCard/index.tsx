@@ -5,9 +5,10 @@ import FastImage from 'react-native-fast-image'
 import { TMDB_IMAGE_URL } from '@env'
 import { useAppNavigation } from '../../../hooks/useAppNavigation'
 import { ITMDBMovieList } from '../../../@types/TMDBResponses'
+import { IFilm } from '../../../@types/Film'
 
 interface FilmCardProps {
-  film: ITMDBMovieList
+  film: ITMDBMovieList | IFilm
 }
 
 function FilmCard({ film }: FilmCardProps) {
@@ -36,7 +37,7 @@ function FilmCard({ film }: FilmCardProps) {
 
   return (
     <S.Container onPress={() => handleNavigateToFilm(film.id)}>
-      <S.Cover source={imageSource} resizeMode={FastImage.resizeMode.contain} />
+      <S.Cover source={imageSource} resizeMode={FastImage.resizeMode.cover} />
       <S.Info>
         <S.Title numberOfLines={2} ellipsizeMode="tail">
           {film.title}
