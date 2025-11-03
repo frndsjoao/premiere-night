@@ -34,15 +34,6 @@ const FilmCarousel = ({ films, title }: FilmCarouselProps) => {
           maxToRenderPerBatch={5}
           initialNumToRender={3}
         />
-        <S.FadeGradient
-          colors={[
-            'rgba(0, 0, 0, 0)',
-            'rgba(0, 0, 0, 0.4)',
-            'rgba(0, 0, 0, 0.6)',
-          ]}
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 0 }}
-        />
       </S.CarouselWrapper>
     </S.Container>
   )

@@ -1,5 +1,6 @@
-import { ScrollView } from 'react-native'
+import { FlatList, ScrollView } from 'react-native'
 import styled from 'styled-components/native'
+import { IFilm } from '../../@types/Film'
 
 export const Header = styled.View`
   margin-top: ${({ theme }) => theme.spacing.md}px;
@@ -25,15 +26,36 @@ export const Subtitle = styled.Text`
 `
 
 export const Content = styled.View`
-  flex-direction: row;
-  flex-wrap: wrap;
-  margin: 0 auto;
-  gap: ${({ theme }) => theme.spacing.md}px;
+  flex: 1;
+`
+
+export const EmptyContainer = styled.View`
+  align-items: center;
+  justify-content: center;
+`
+
+export const EmptyTitle = styled.Text`
+  margin-top: ${({ theme }) => theme.spacing.xxl}px;
+  color: ${({ theme }) => theme.colors.textSecondary};
+  font-size: ${({ theme }) => theme.fontSizes.xs}px;
+  font-weight: ${({ theme }) => theme.fontWeights.medium};
 `
 
 export const ScrollContainer = styled(ScrollView).attrs(({ theme }) => ({
   showsVerticalScrollIndicator: false,
   contentContainerStyle: {
     paddingBottom: theme.spacing.lg,
+  },
+}))``
+
+export const FlatListWrapper = styled(FlatList<IFilm>).attrs(({ theme }) => ({
+  showsVerticalScrollIndicator: false,
+  contentContainerStyle: {
+    paddingHorizontal: theme.spacing.md,
+    paddingBottom: theme.spacing.lg,
+  },
+  columnWrapperStyle: {
+    gap: theme.spacing.sm,
+    justifyContent: 'space-between',
   },
 }))``

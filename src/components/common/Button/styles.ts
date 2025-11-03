@@ -15,5 +15,5 @@ export const Container = styled.TouchableOpacity`
 export const Title = styled.Text`
   color: ${({ theme }) => theme.colors.textNegative};
   font-size: ${({ theme }) => theme.fontSizes.sm}px;
-  font-weight: ${({ theme }) => theme.fontWeights.medium};
+  font-weight: ${({ theme }) => theme.fontWeights.semibold};
 `

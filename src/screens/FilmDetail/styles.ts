@@ -89,6 +89,7 @@ export const ButtonWrapper = styled.View`
 export const Section = styled.View`
   margin-top: ${({ theme }) => theme.spacing.lg}px;
   margin-bottom: ${({ theme }) => theme.spacing.lg}px;
+  gap: ${({ theme }) => theme.spacing.sm}px;
 `
 
 export const SectionTitle = styled.Text`
@@ -97,17 +98,9 @@ export const SectionTitle = styled.Text`
   font-weight: ${({ theme }) => theme.fontWeights.bold};
 `
 
-export const ScrollContainer = styled(ScrollView).attrs(({ theme }) => ({
-  showsVerticalScrollIndicator: false,
-  contentContainerStyle: {
-    paddingBottom: theme.spacing.lg,
-  },
-}))``
-
 export const GridContainer = styled.View`
   flex-direction: row;
   flex-wrap: wrap;
-  margin-top: ${({ theme }) => theme.spacing.md}px;
   margin-left: -${({ theme }) => theme.spacing.sm}px;
   margin-right: -${({ theme }) => theme.spacing.sm}px;
 `
@@ -116,3 +109,17 @@ export const GridItem = styled.View`
   width: 50%;
   padding: ${({ theme }) => theme.spacing.sm}px;
 `
+
+export const TagSection = styled.View`
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: ${({ theme }) => theme.spacing.md}px;
+  margin-top: ${({ theme }) => theme.spacing.md}px;
+`
+
+export const ScrollContainer = styled(ScrollView).attrs(({ theme }) => ({
+  showsVerticalScrollIndicator: false,
+  contentContainerStyle: {
+    paddingBottom: theme.spacing.lg,
+  },
+}))``

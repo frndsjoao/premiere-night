@@ -1,15 +1,12 @@
-import React, { memo, useCallback, useMemo } from 'react'
+import React, { memo, useCallback } from 'react'
 import { RootStackParamList } from '../../routes/types'
 import { StackScreenProps } from '@react-navigation/stack'
 import * as S from './styles'
 import { useGetFilmById } from '../../hooks/useFilms'
 import LoadingScreen from '../../components/layout/LoadingScreen'
 import FastImage from 'react-native-fast-image'
-import { formatDate, getYear } from '../../utils/formatDate'
-import { TMDB_IMAGE_URL } from '@env'
 import Button from '../../components/common/Button'
 import DetailCard from '../../components/common/DetailCard'
-import { getLanguageName } from '../../utils/getLanguageName'
 import { useTheme } from 'styled-components/native'
 import { X } from 'lucide-react-native'
 import { useAppDispatch, useAppSelector } from '../../store'
@@ -19,6 +16,8 @@ import {
   selectIsInWatchlist,
 } from '../../store/slice/watchlist'
 import { AddedIcon, AddIcon } from './components/FilmDetailIconBtn'
+import Tag from '../../components/common/Tag'
+import { useFilmDetailData } from '../../hooks/useFilmDetailsData'
 
 type Props = StackScreenProps<RootStackParamList, 'FilmDetail'>
 
@@ -28,6 +27,8 @@ function FilmDetailScreen({ route, navigation }: Props) {
   const dispatch = useAppDispatch()
 
   const { data: film, isLoading } = useGetFilmById(filmId)
+  const { filmDetails, imageSource, releaseYear } = useFilmDetailData(film)
+
   const filmIsInWatchlist = useAppSelector(state =>
     film ? selectIsInWatchlist(film?.id)(state) : false,
   )
@@ -44,44 +45,6 @@ function FilmDetailScreen({ route, navigation }: Props) {
       dispatch(addToWatchlist(film))
     }
   }, [dispatch, film, filmIsInWatchlist])
-
-  const imageSource = useMemo(() => {
-    let uri = ''
-    if (film?.poster_path) {
-      uri = `${TMDB_IMAGE_URL}${film?.poster_path}`
-    }
-
-    return {
-      uri,
-      priority: FastImage.priority.normal,
-      cache: FastImage.cacheControl.immutable,
-    }
-  }, [film?.poster_path])
-
-  const releaseYear = useMemo(
-    () => (film?.release_date ? getYear(film.release_date) : ''),
-    [film?.release_date],
-  )
-
-  const filmDetails = useMemo(() => {
-    return [
-      { label: 'Release date', value: formatDate(film?.release_date ?? '') },
-      { label: 'Status', value: film?.status ?? '' },
-      {
-        label: 'Main production',
-        value: film?.production_companies?.[0]?.name ?? 'N/A',
-      },
-      {
-        label: 'Language',
-        value: getLanguageName(film?.original_language ?? ''),
-      },
-    ]
-  }, [
-    film?.original_language,
-    film?.production_companies,
-    film?.release_date,
-    film?.status,
-  ])
 
   if (isLoading || !film) {
     return <LoadingScreen />
@@ -110,7 +73,9 @@ function FilmDetailScreen({ route, navigation }: Props) {
           <S.Title>{film?.title}</S.Title>
 
           <S.Info>
-            <S.Label>★ {film.vote_average}</S.Label>
+            {film.vote_average > 0 && (
+              <S.Label>★ {film.vote_average.toFixed(1)}</S.Label>
+            )}
             <S.Label>{releaseYear}</S.Label>
             <S.Label>{film.runtime} min</S.Label>
           </S.Info>
@@ -123,8 +88,14 @@ function FilmDetailScreen({ route, navigation }: Props) {
             />
           </S.ButtonWrapper>
 
+          <S.TagSection>
+            {film.genres.map(item => (
+              <Tag key={item.id} label={item.name} />
+            ))}
+          </S.TagSection>
+
           <S.Section>
-            <S.SectionTitle>Overview</S.SectionTitle>
+            <S.SectionTitle>Synposis</S.SectionTitle>
             <S.Label>{film.overview}</S.Label>
           </S.Section>
 

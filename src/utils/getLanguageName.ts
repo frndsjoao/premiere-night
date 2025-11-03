@@ -10,4 +10,6 @@ const LANGUAGE_MAP = {
   zh: 'Chinese',
 }
 
-export const getLanguageName = (code: string) => LANGUAGE_MAP[code] || code
+export const getLanguageName = (code: string): string => {
+  return LANGUAGE_MAP[code as keyof typeof LANGUAGE_MAP] ?? code
+}

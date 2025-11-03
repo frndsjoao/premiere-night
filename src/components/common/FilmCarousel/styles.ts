@@ -1,7 +1,6 @@
 import styled from 'styled-components/native'
 import { FlatList } from 'react-native'
 import { ITMDBMovieList } from '../../../@types/TMDBResponses'
-import LinearGradient from 'react-native-linear-gradient'
 
 export const Container = styled.View`
   margin-top: ${({ theme }) => theme.spacing.md}px;
@@ -28,13 +27,3 @@ export const FlatListWrapper = styled(FlatList<ITMDBMovieList>).attrs(
     },
   }),
 )``
-
-export const FadeGradient = styled(LinearGradient)`
-  position: absolute;
-  right: 0;
-  top: ${({ theme }) => theme.spacing.sm}px;
-  height: 250px;
-  width: 80px;
-  pointer-events: none;
-  z-index: 1;
-`
